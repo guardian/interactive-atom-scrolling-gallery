@@ -1,0 +1,9 @@
+.scrolling-gallery {
+    display: flex;
+    overflow: scroll;
+    max-width: 900px;
+
+    img {
+        max-height: 250px;
+    }
+}

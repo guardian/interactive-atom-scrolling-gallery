@@ -1,32 +1,10 @@
 <div class="interactive-wrapper">
-    <div class='scrolling-gallery scrolling-gallery__body'>
-        <picture>
-            <source srcset="https://media.guim.co.uk/ce57928f65728d7922396f5b3e14261e1200deae/1550_0_4369_5464/800.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/ce57928f65728d7922396f5b3e14261e1200deae/1550_0_4369_5464/800.jpg" alt="" />
+    <div class='scrolling-gallery scrolling-gallery__body swiper'>
+    {{ #images}}
+        <picture class="swiper-slide">
+            <source srcset="{{img-desktop}}" media="(min-width: 800px)">
+            <img src="{{img-mobile}}" alt="{{alt-text}}" />
         </picture>
-        <picture>
-            <source srcset="https://media.guim.co.uk/17f46b05a207ef188895e8e0ea2219f1800d8203/0_217_6561_3936/1000.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/17f46b05a207ef188895e8e0ea2219f1800d8203/0_217_6561_3936/1000.jpg" alt="" />
-        </picture>
-        <picture>
-            <source srcset="https://media.guim.co.uk/271e47eaa9e9d3d08a393e0265083c86a9dbe308/139_101_1140_752/1000.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/271e47eaa9e9d3d08a393e0265083c86a9dbe308/139_101_1140_752/1000.jpg" alt="" />
-        </picture>
-        <picture>
-            <source srcset="https://media.guim.co.uk/ede61fd71e90a0ed63c1ab1928547aeafe2c41f1/1267_0_2903_3630/800.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/ede61fd71e90a0ed63c1ab1928547aeafe2c41f1/1267_0_2903_3630/800.jpg" alt="" />
-        </picture>
-        <picture>
-            <source srcset="https://media.guim.co.uk/6cbd38f5fc821471f2a0c586d5f6b8a7dd65e541/45_46_1581_949/1000.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/6cbd38f5fc821471f2a0c586d5f6b8a7dd65e541/45_46_1581_949/1000.jpg" alt="" />
-        </picture>
-        <picture>
-            <source srcset="https://media.guim.co.uk/77ed0567d8ded5295d5fa9429b4a0365dd6e4b17/569_234_2192_2739/800.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/77ed0567d8ded5295d5fa9429b4a0365dd6e4b17/569_234_2192_2739/800.jpg" alt="" />
-        </picture>
-        <picture>
-            <source srcset="https://media.guim.co.uk/0cdb7efb56d016c3443bf7e1c4839262688f4ef9/0_100_3000_1800/1000.jpg" media="(min-width: 800px)">
-            <img src="https://media.guim.co.uk/0cdb7efb56d016c3443bf7e1c4839262688f4ef9/0_100_3000_1800/1000.jpg" alt="" />
-        </picture>
+    {{ /images }}
     </div>
 </div>
