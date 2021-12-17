@@ -1,10 +1,12 @@
 <div class="interactive-wrapper">
-    <div class='scrolling-gallery scrolling-gallery__body swiper'>
-    {{ #images}}
-        <picture class="swiper-slide">
-            <source srcset="{{img-desktop}}" media="(min-width: 800px)">
-            <img src="{{img-mobile}}" alt="{{alt-text}}" />
-        </picture>
-    {{ /images }}
+    <div class='swiper-container'>
+        <div class='scrolling-gallery scrolling-gallery__body swiper-wrapper'>
+        {{ #images}}
+            <picture class="swiper-slide">
+                <source srcset="{{img-desktop}}" media="(min-width: 800px)">
+                <img src="{{img-mobile}}" alt="{{alt-text}}" />
+            </picture>
+        {{ /images }}
+        </div>
     </div>
 </div>

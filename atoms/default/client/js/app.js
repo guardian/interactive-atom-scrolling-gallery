@@ -1,52 +1,35 @@
-// if you want to import a module from shared/js then you can
-// just do e.g. import Scatter from "shared/js/scatter.js"
-import Swiper from "swiper";
 
-var fastSpeed = 400;
-var slowSpeed = 12000;
 
-var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 3,
-    centeredSlides: false,
-    spaceBetween: 1,
-    loop: true,
-    grabCursor: true,
-    freeMode: true,
-    roundLengths: true,
-    autoplay: {
-        delay: 0,
-        disableOnInteraction: false
-    },
-    breakpoints: {
-        320: {
-            slidesPerView: 1.2,
-            spaceBetween: 1
-        },
-        660: {
-            slidesPerView: 1.6,
-            spaceBetween: 1
-        },
-        980: {
-            slidesPerView: 2.1,
-            spaceBetween: 1
-        }
-    },
-    speed: slowSpeed
+// aditionalImages();
+
+// const aditionalImages = () => {
+const swiperContainer = document.querySelector('.swiper-container');
+const swiperWrapper = document.querySelector('.swiper-wrapper');
+const swiperImages = document.querySelectorAll('.swiper-slide');
+console.log('cm-log:', swiperContainer.offsetWidth)
+let imgSize = 0;
+let fullLength = 0;
+let imageDuplicates = [];
+
+document.documentElement.style.setProperty('--gallery-width', `-${swiperWrapper.offsetWidth}px`);
+
+swiperImages.forEach((img) => {
+    if (swiperContainer.offsetWidth > imgSize) {
+        imgSize += img.offsetWidth
+        imageDuplicates.push(img);
+    }
+    fullLength += img.offsetWidth
+    console.log('cm-log: fullLength', fullLength)
 });
 
+imageDuplicates.forEach((img) => {
+    console.log('cm-log:', img)
+    const newImage = img.cloneNode(true)
+    newImage.classList.add('swiper-slide-duplicate')
+    newImage.classList.remove('swiper-slide')
+    swiperWrapper.appendChild(newImage)
+});
 
-if (isAndroidApp && window.GuardianJSInterface.registerRelatedCardsTouch) {
+swiperWrapper.classList.add('first');
 
-    i = 0;
-
-    swiper.forEach(swipe => {
-        var index = i;
-        swiper[index].wrapperEl.addEventListener("touchstart", function () {
-            window.GuardianJSInterface.registerRelatedCardsTouch(true);
-        });
-        swiper[index].wrapperEl.addEventListener("touchend", function () {
-            window.GuardianJSInterface.registerRelatedCardsTouch(false);
-        });
-        i++;
-    });
-}
+// }

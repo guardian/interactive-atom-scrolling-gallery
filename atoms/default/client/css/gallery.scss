@@ -1,9 +1,42 @@
-.scrolling-gallery {
+@import "mq";
+@import "fonts";
+@import "palette";
+// @import "embed";
+
+// Uncomment for embeds
+//@import "embed";
+// Uncomment for full screen (including immersive article main media)
+// @import "fullscreen";
+
+// .element-atom,
+// .interactive-atom {
+//     margin: 0 !important;
+// }
+:root {
+    --gallery-width: -3120px;
+}
+
+.swiper-container {
+    overflow: hidden;
     display: flex;
-    overflow: scroll;
-    max-width: 900px;
+}
+
+.swiper-wrapper {
+    display: flex;
+    &.first {
+        animation: scrollLeft 40s infinite linear;
+    }
 
     img {
-        max-height: 250px;
+        height: 350px;
+    }
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(var(--gallery-width), 0);
     }
 }

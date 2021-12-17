@@ -2,7 +2,7 @@
 
 ### Features 
  - Auto scrolls from left to right 
- - Any number of images can be added
+ - ~Any number of images can be added~
  - Can be paused
  - Can scroll at altered speed 
  - Can be moved 
