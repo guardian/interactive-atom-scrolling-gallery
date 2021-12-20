@@ -11,7 +11,7 @@ let imgSize = 0;
 let fullLength = 0;
 let imageDuplicates = [];
 
-document.documentElement.style.setProperty('--gallery-width', `-${swiperWrapper.offsetWidth}px`);
+swiperWrapper.style.setProperty('--gallery-width', `-${swiperWrapper.offsetWidth}px`);
 
 swiperImages.forEach((img) => {
     if (swiperContainer.offsetWidth > imgSize) {
@@ -30,6 +30,6 @@ imageDuplicates.forEach((img) => {
     swiperWrapper.appendChild(newImage)
 });
 
-swiperWrapper.classList.add('first');
+// swiperWrapper.classList.add('first');
 
 // }

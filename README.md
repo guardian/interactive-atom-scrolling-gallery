@@ -9,6 +9,7 @@
  - Circular scroll
  - Can have images of all different sizes
  - Lazy loads images
+ - speed based on number of photos
 
 ### Running locally
 
