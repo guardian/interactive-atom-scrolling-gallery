@@ -30,6 +30,28 @@
     }
 }
 
+.swiper-button {
+    z-index: 1;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 70%;
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 2rem;
+    left: 1rem;
+    border: none;
+    
+    svg {
+        display: none;
+        margin: auto;
+
+        &.swiper-button--play.active,
+        &.swiper-button--pause.active {
+            display: block;
+        }
+    }
+}
+
 .swiper-slide {
     position: relative;
     display: flex;
@@ -39,7 +61,7 @@
         font-size: 13px;
         color: rgb(255, 255, 255);
         background-color: rgba(12, 12, 12, 0.5);
-        padding: 0px 3px 3px;
+        padding: 6px;
         position: absolute;
         bottom: 3px;
 
