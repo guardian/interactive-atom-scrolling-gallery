@@ -34,47 +34,44 @@ imageDuplicates.forEach((img) => {
 
 swiperWrapper.classList.add('first');
 
-let mouseDown = false;
-let startX = 0;
-let scrollLeft = 0;
+// let mouseDown = false;
+// let startX = 0;
+// let scrollLeft = 0;
 
-const startDragging = (e) => {
-  e.preventDefault();
-  mouseDown = true;
-  swiperWrapper.style.animationPlayState = 'paused';
-  swiperWrapper.classList.remove('first');
-  startX = e.pageX - swiperWrapper.offsetLeft;
-  scrollLeft = swiperWrapper.scrollLeft;
-};
+// const startDragging = (e) => {
+//   e.preventDefault();
+//   mouseDown = true;
+//   console.log('cm-log:', e.currentTarget);
+//   swiperWrapper.style.animationPlayState = 'paused';
+//   swiperWrapper.classList.remove('first');
+//   document.querySelector('.swiper-button--play').classList.add('active');
+//   document.querySelector('.swiper-button--pause').classList.remove('active');
+// eslint-disable-next-line max-len
+//   document.querySelectorAll('.swiper-slide-duplicate').forEach((img) => { img.style.display = 'none'; });
+//   startX = e.pageX - swiperWrapper.offsetLeft;
+//   scrollLeft = swiperWrapper.scrollLeft;
+// };
 
-const stopDragging = () => {
-  mouseDown = false;
-};
+// const stopDragging = () => {
+//   mouseDown = false;
+// };
 
-const dragging = (e) => {
-  e.preventDefault();
-  if (!mouseDown) return;
-  const x = e.pageX - swiperWrapper.offsetLeft;
-  const scroll = x - startX;
-  swiperWrapper.style.transform = `translate3d(-${scrollLeft - scroll + 600}px, 0, 0)`;
-};
+// const dragging = (e) => {
+//   e.preventDefault();
+//   if (!mouseDown) return;
+//   const x = e.pageX - swiperWrapper.offsetLeft;
+//   const scroll = x - startX;
+//   swiperWrapper.style.transform = `translate3d(-${scrollLeft - scroll}px, 0, 0)`;
+// };
 
-// Add the event listeners
-swiperImages.forEach((img) => {
-  img.addEventListener('touchstart', startDragging, false);
-  img.addEventListener('mousedown', startDragging, false);
+// // Add the event listeners
+// swiperImages.forEach((img) => {
+//   img.addEventListener('touchstart', startDragging, false);
+//   img.addEventListener('mousedown', startDragging, false);
 
-  img.addEventListener('touchmove', dragging, false);
-  img.addEventListener('mousemove', dragging, false);
+//   img.addEventListener('touchmove', dragging, false);
+//   img.addEventListener('mousemove', dragging, false);
 
-  img.addEventListener('touchend', stopDragging, false);
-  img.addEventListener('mouseup', stopDragging, false);
-});
-
-swiperContainer.addEventListener('scroll', () => {
-  // swiperWrapper.style.animationPlayState = 'paused';
-  swiperWrapper.classList.remove('first');
-  document.querySelector('.swiper-button--play').classList.add('active');
-  document.querySelector('.swiper-button--pause').classList.remove('active');
-  document.querySelectorAll('.swiper-slide-duplicate').forEach((img) => { img.style.display = 'none'; });
-});
+//   img.addEventListener('touchend', stopDragging, false);
+//   img.addEventListener('mouseup', stopDragging, false);
+// });
