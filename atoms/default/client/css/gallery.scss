@@ -20,10 +20,11 @@
 
 .swiper-wrapper {
     --gallery-width: -3120px;
+    --gallery-speed: 40s;
     display: flex;
 
     &.first {
-        animation: scrollLeft 40s infinite linear;
+        animation: scrollLeft var(--gallery-speed) infinite linear;
     }
 
     img {
