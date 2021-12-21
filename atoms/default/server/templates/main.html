@@ -17,7 +17,7 @@
                     <source srcset="{{img-desktop}}" media="(min-width: 800px)">
                     <img src="{{img-mobile}}" alt="{{alt-text}}" />
                 </picture>
-                <span class="swiper-slide__caption">{{caption}}</span>
+                {{#createCaption}}{{caption}}{{/createCaption}}
             </div>
         {{/images}}
         </div>
