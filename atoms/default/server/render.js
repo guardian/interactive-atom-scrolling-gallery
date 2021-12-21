@@ -15,6 +15,10 @@ export function render() {
       ...sheets,
       // eslint-disable-next-line no-return-assign
       count: () => () => counter += 1,
+      createCaption: () => (text, rendering) => {
+        if (rendering(text)) return `<span class="swiper-slide__caption">${rendering(text)}</span>`;
+        return '';
+      },
     };
     const html = Mustache.render(mainTemplate, toRender);
     return html;
