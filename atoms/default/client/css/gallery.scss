@@ -21,6 +21,7 @@
 .swiper-wrapper {
     --gallery-width: -3120px;
     display: flex;
+
     &.first {
         animation: scrollLeft 40s infinite linear;
     }
@@ -75,9 +76,9 @@
 
 @keyframes scrollLeft {
     0% {
-        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate(var(--gallery-width), 0);
+        transform: translate3d(var(--gallery-width), 0, 0);
     }
 }

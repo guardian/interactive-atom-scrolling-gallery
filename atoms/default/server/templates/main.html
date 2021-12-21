@@ -12,7 +12,7 @@
         </button>
         <div class='scrolling-gallery scrolling-gallery__body swiper-wrapper'>
         {{#images}}
-            <div class='swiper-slide'>
+            <div class='swiper-slide' data-image-id={{#count}}{{/count}}>
                 <picture>
                     <source srcset="{{img-desktop}}" media="(min-width: 800px)">
                     <img src="{{img-mobile}}" alt="{{alt-text}}" />
