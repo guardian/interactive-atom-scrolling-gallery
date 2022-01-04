@@ -14,6 +14,8 @@ Component to generate an auto-scrolling gallery.
 - Lazy loading images
 - Image size based on mobile or desktop
 - Default app swiping disabled
+- Should work inside and outside of an iFrame 
+- Should work in the app
 
 ### Generating a gallery using the spreadsheet
 
