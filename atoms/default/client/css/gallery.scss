@@ -13,12 +13,12 @@
 //     margin: 0 !important;
 // }
 
-.swiper-container {
+.gallery-container {
     overflow: hidden;
     display: flex;
 }
 
-.swiper-wrapper {
+.gallery-wrapper {
     --gallery-width: -3120px;
     --gallery-speed: 40s;
     display: flex;
@@ -32,7 +32,7 @@
     }
 }
 
-.swiper-button {
+.gallery-button {
     z-index: 1;
     height: 3rem;
     width: 3rem;
@@ -47,15 +47,15 @@
         display: none;
         margin: auto;
 
-        &.swiper-button--play.active,
-        &.swiper-button--pause.active {
+        &.gallery-button--play.active,
+        &.gallery-button--pause.active {
             display: block;
         }
     }
 }
 
-.swiper-slide,
-.swiper-slide-duplicate {
+.gallery-slide,
+.gallery-slide-duplicate {
     position: relative;
     display: flex;
 

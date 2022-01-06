@@ -10,6 +10,7 @@ Component to generate an auto-scrolling gallery.
 
 ### To be included: 
 - Ability to swipe through images
+    - Will need to recalculate initialX 
 - Ability to generate the gallery without dev involvement
 - Lazy loading images
 - Image size based on mobile or desktop
