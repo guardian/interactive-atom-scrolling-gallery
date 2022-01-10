@@ -69,9 +69,9 @@ export default class Gallery {
   }
 
   translateTo() {
-    const time = new Date().getTime() - this.galleryPlayingInitialTime;
-    const progress = time / (this.speed * 1000);
-    const currentPosition = progress * this.galleryWrapper.offsetWidth;
+    this.time = new Date().getTime() - this.galleryPlayingInitialTime;
+    const progress = this.time / (this.speed * 1000);
+    const currentPosition = progress * this.galleryWrapper.offsetWidth + this.translate;
     return currentPosition;
   }
 
@@ -83,6 +83,7 @@ export default class Gallery {
     this.translate = -this.scroll;
     if (this.playingGallery) {
       this.galleryWrapper.classList.remove('first');
+      this.galleryWrapper.classList.remove('second');
       this.galleryPause();
       document.querySelectorAll('.gallery-slide-duplicate').forEach((img) => { img.style.display = 'none'; });
 
@@ -100,12 +101,17 @@ export default class Gallery {
 
   stopDragging() {
     this.mouseDown = false;
+    this.speed = Math.round(40 - (this.time / 1000));
+    this.galleryWrapper.style.setProperty('--gallery-current-location', `-${this.scroll}px`);
+    this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
     this.galleryWrapper.classList.add('second');
-    // if (!this.userPaused) this.galleryPlay();
+    if (!this.userPaused) this.galleryPlay();
     // this.galleryWrapper.addEventListener('animationend', () => {
+    //   if (this.galleryWrapper.classList.contains('second')) {
     //     this.galleryWrapper.classList.remove('second');
-    //     this.galleryWrapper.classList.remove('first');
-    // }), false);
+    //     // this.galleryWrapper.classList.add('first');
+    //   }
+    // });
   }
 
   addDraggingFunctionalityToGallery() {

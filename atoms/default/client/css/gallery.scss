@@ -21,10 +21,16 @@
 .gallery-wrapper {
     --gallery-width: -3120px;
     --gallery-speed: 40s;
+    --gallery-speed-resume: 40s;
+    --gallery-current-location: -77px;
     display: flex;
 
     &.first {
         animation: scrollLeft var(--gallery-speed) infinite linear;
+    }
+
+    &.second {
+        animation: scrollResume var(--gallery-speed-resume) linear;
     }
 
     img {
@@ -78,6 +84,15 @@
 @keyframes scrollLeft {
     0% {
         transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(var(--gallery-width), 0, 0);
+    }
+}
+
+@keyframes scrollResume {
+    0% {
+        transform: translate3d(0%);
     }
     100% {
         transform: translate3d(var(--gallery-width), 0, 0);
