@@ -67,7 +67,6 @@
     "mustache": "^4.2.0",
     "raw-loader": "^4.0.2",
     "request-promise": "^4.2.6",
-    "swiper": "^7.3.2",
     "terser-webpack-plugin": "^4.2.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "unfetch": "^4.2.0"
