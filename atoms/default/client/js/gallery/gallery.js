@@ -11,7 +11,7 @@ export default class Gallery {
     this.userPaused = false;
 
     this.mouseDown = false;
-    this.startX = 0;
+    this.scroll = 0;
     this.initialLeft = this.galleryWrapper.getBoundingClientRect().left;
     this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
 
@@ -72,37 +72,40 @@ export default class Gallery {
     const time = new Date().getTime() - this.galleryPlayingInitialTime;
     const progress = time / (this.speed * 1000);
     const currentPosition = progress * this.galleryWrapper.offsetWidth;
-    console.log('cm-log: this.galleryWrapper.offsetWidth', this.galleryWrapper.offsetWidth);
-    console.log('cm-log: currentPosition', currentPosition);
-    console.log('cm-log: progress', progress);
     return currentPosition;
   }
 
   startDragging(e) {
     e.preventDefault();
-    console.log('cm-log: new');
     this.mouseDown = true;
     // eslint-disable-next-line max-len
-    this.galleryWrapper.classList.remove('first');
-    this.galleryPause();
-    document.querySelectorAll('.gallery-slide-duplicate').forEach((img) => { img.style.display = 'none'; });
+    this.initialLocale = e.pageX;
+    this.translate = -this.scroll;
+    if (this.playingGallery) {
+      this.galleryWrapper.classList.remove('first');
+      this.galleryPause();
+      document.querySelectorAll('.gallery-slide-duplicate').forEach((img) => { img.style.display = 'none'; });
 
-    const translate = this.translateTo(e);
-    this.galleryWrapper.style.transform = `translate3d(-${translate}px, 0, 0)`;
+      this.translate = this.translateTo(e);
+      this.galleryWrapper.style.transform = `translate3d(-${this.translate}px, 0, 0)`;
+    }
   }
 
-  // const dragging = (e) => {
-  //   e.preventDefault();
-  //   if (!mouseDown) return;
-  //   const x = e.pageX - galleryWrapper.getBoundingClientRect().left;
-  //   const scroll = x - startX;
-  //   galleryWrapper.style.transform = `translate3d(${scroll}px, 0, 0)`;
-  // };
+  dragging(e) {
+    e.preventDefault();
+    if (!this.mouseDown) return;
+    this.scroll = e.pageX - this.translate - this.initialLocale;
+    this.galleryWrapper.style.transform = `translate3d(${this.scroll}px, 0, 0)`;
+  }
 
   stopDragging() {
     this.mouseDown = false;
-    this.galleryWrapper.classList.add('first');
-    if (!this.userPaused) this.galleryPlay();
+    this.galleryWrapper.classList.add('second');
+    // if (!this.userPaused) this.galleryPlay();
+    // this.galleryWrapper.addEventListener('animationend', () => {
+    //     this.galleryWrapper.classList.remove('second');
+    //     this.galleryWrapper.classList.remove('first');
+    // }), false);
   }
 
   addDraggingFunctionalityToGallery() {
@@ -110,8 +113,8 @@ export default class Gallery {
       img.addEventListener('touchstart', this.startDragging.bind(this), false);
       img.addEventListener('mousedown', this.startDragging.bind(this), false);
 
-      // img.addEventListener('touchmove', dragging, false);
-      // img.addEventListener('mousemove', dragging, false);
+      img.addEventListener('touchmove', this.dragging.bind(this), false);
+      img.addEventListener('mousemove', this.dragging.bind(this), false);
 
       img.addEventListener('touchend', this.stopDragging.bind(this), false);
       img.addEventListener('mouseup', this.stopDragging.bind(this), false);
