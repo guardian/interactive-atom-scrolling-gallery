@@ -6,6 +6,7 @@ export default class Gallery {
     this.galleryImages = document.querySelectorAll('.gallery-slide');
     this.galleryButton = document.querySelector('.gallery-button');
     this.speed = 40;
+    this.initialSpeed = 40;
 
     this.playingGallery = false;
     this.userPaused = false;
@@ -13,6 +14,7 @@ export default class Gallery {
     this.mouseDown = false;
     this.scroll = 0;
     this.initialLeft = this.galleryWrapper.getBoundingClientRect().left;
+    this.galleryInitialLength = this.galleryWrapper.offsetWidth;
     this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
 
     this.galleryStart();
@@ -117,8 +119,9 @@ export default class Gallery {
 
   stopDragging() {
     this.mouseDown = false;
-    this.speed = Math.round(40 - (this.time / 1000));
     this.galleryWrapper.style.setProperty('--gallery-current-location', `${this.scroll}px`);
+    // eslint-disable-next-line max-len
+    this.speed = Math.round(this.initialSpeed + (this.scroll / this.galleryInitialLength) * this.initialSpeed);
     this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
     this.galleryWrapper.classList.add('second');
     if (!this.userPaused) this.galleryPlay();
