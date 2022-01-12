@@ -33,6 +33,14 @@ export default class Gallery {
         this.speed = 40;
         this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
         this.galleryWrapper.classList.add('first');
+        this.galleryPlayingInitialTime = new Date().getTime();
+        this.scroll = 0;
+      }
+    });
+    this.galleryWrapper.addEventListener('animationiteration', () => {
+      if (this.galleryWrapper.classList.contains('first')) {
+        this.galleryPlayingInitialTime = new Date().getTime();
+        this.scroll = 0;
       }
     });
     this.createImagesDuplicatesToAllowLoopingGallery();
@@ -110,7 +118,7 @@ export default class Gallery {
   stopDragging() {
     this.mouseDown = false;
     this.speed = Math.round(40 - (this.time / 1000));
-    this.galleryWrapper.style.setProperty('--gallery-current-location', `-${this.scroll}px`);
+    this.galleryWrapper.style.setProperty('--gallery-current-location', `${this.scroll}px`);
     this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
     this.galleryWrapper.classList.add('second');
     if (!this.userPaused) this.galleryPlay();
