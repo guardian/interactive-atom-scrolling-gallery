@@ -1,25 +1,23 @@
-<div class="interactive-wrapper">
-    <div class='gallery-container'>
-        <button class='gallery-button'>
-            <svg class='gallery-button--play' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M24.1749 15.15V14.45L8.575 8L8 8.45V21.15L8.575 21.55L24.1749 15.15Z" fill="#052962" />
-            </svg>
-            <svg class='gallery-button--pause active' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99999 5H7L6 6V19H9.99999V5ZM14 19H17L18 18V5H14V19Z"
-                    fill="#052962" />
-            </svg>
-        </button>
-        <div class='scrolling-gallery scrolling-gallery__body gallery-wrapper'>
-        {{#images}}
-            <div class='gallery-slide' data-image-id={{#count}}{{/count}}>
-                <picture>
-                    <source srcset="{{img-desktop}}" media="(min-width: 800px)">
-                    <img src="{{img-mobile}}" alt="{{alt-text}}" />
-                </picture>
-                {{#createCaption}}{{caption}}{{/createCaption}}
-            </div>
-        {{/images}}
+<div class='gallery-container'>
+    <button class='gallery-button'>
+        <svg class='gallery-button--play' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M24.1749 15.15V14.45L8.575 8L8 8.45V21.15L8.575 21.55L24.1749 15.15Z" fill="#052962" />
+        </svg>
+        <svg class='gallery-button--pause active' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99999 5H7L6 6V19H9.99999V5ZM14 19H17L18 18V5H14V19Z"
+                fill="#052962" />
+        </svg>
+    </button>
+    <div class='scrolling-gallery scrolling-gallery__body gallery-wrapper'>
+    {{#images}}
+        <div class='gallery-slide' data-image-id={{#count}}{{/count}}>
+            <picture>
+                <source srcset="{{img-desktop}}" media="(min-width: 800px)">
+                <img src="{{img-mobile}}" alt="{{alt-text}}" />
+            </picture>
+            {{#createCaption}}{{caption}}{{/createCaption}}
         </div>
+    {{/images}}
     </div>
 </div>

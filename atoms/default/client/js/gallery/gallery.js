@@ -5,48 +5,35 @@ export default class Gallery {
     this.galleryWrapper = document.querySelector('.gallery-wrapper');
     this.galleryImages = document.querySelectorAll('.gallery-slide');
     this.galleryButton = document.querySelector('.gallery-button');
-    this.speed = 40;
+
     this.initialSpeed = 40;
-
+    this.speed = this.initialSpeed;
     this.playingGallery = false;
-    this.userPaused = false;
-
     this.mouseDown = false;
     this.scroll = 0;
     this.initialLeft = this.galleryWrapper.getBoundingClientRect().left;
     this.galleryInitialLength = this.galleryWrapper.offsetWidth;
+
     this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
-
-    this.galleryStart();
-    this.galleryButton.addEventListener('click', () => {
-      if (this.playingGallery) {
-        this.galleryPause();
-        this.userPaused = true;
-      } else {
-        this.galleryPlay();
-        this.userPaused = false;
-      }
-    });
-
-    this.galleryWrapper.addEventListener('animationend', (e) => {
-      if (this.galleryWrapper.classList.contains('second')) {
-        e.preventDefault();
-        this.galleryWrapper.classList.remove('second');
-        this.speed = 40;
-        this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
-        this.galleryWrapper.classList.add('first');
-        this.galleryPlayingInitialTime = new Date().getTime();
-        this.scroll = 0;
-      }
-    });
-    this.galleryWrapper.addEventListener('animationiteration', () => {
-      if (this.galleryWrapper.classList.contains('first')) {
-        this.galleryPlayingInitialTime = new Date().getTime();
-        this.scroll = 0;
-      }
-    });
     this.createImagesDuplicatesToAllowLoopingGallery();
+    this.galleryStart();
     this.addDraggingFunctionalityToGallery();
+
+    this.galleryWrapper.addEventListener('animationend', (e) => this.resetAnimation(e));
+    this.galleryWrapper.addEventListener('animationiteration', (e) => this.resetAnimation(e));
+    this.galleryButton.addEventListener('click', () => (this.playingGallery ? this.galleryPause() : this.galleryPlay()));
+  }
+
+  resetAnimation(e) {
+    e.preventDefault();
+    if (this.galleryWrapper.classList.contains('second')) {
+      this.galleryWrapper.classList.remove('second');
+      this.speed = this.initialSpeed;
+      this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
+      this.galleryWrapper.classList.add('first');
+    }
+    this.galleryPlayingInitialTime = new Date().getTime();
+    this.scroll = 0;
   }
 
   galleryStart() {
@@ -74,6 +61,7 @@ export default class Gallery {
     this.imgSize = 0;
     this.imageDuplicates = [];
     this.galleryImages.forEach((img) => {
+      img.classList.add('slides');
       if (this.galleryContainer.offsetWidth > this.imgSize) {
         this.imgSize += img.offsetWidth;
         this.imageDuplicates.push(img);
@@ -124,11 +112,10 @@ export default class Gallery {
     this.speed = Math.round(this.initialSpeed + (this.scroll / this.galleryInitialLength) * this.initialSpeed);
     this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.speed}s`);
     this.galleryWrapper.classList.add('second');
-    if (!this.userPaused) this.galleryPlay();
   }
 
   addDraggingFunctionalityToGallery() {
-    this.galleryImages.forEach((img) => {
+    document.querySelectorAll('.slides').forEach((img) => {
       img.addEventListener('touchstart', this.startDragging.bind(this), false);
       img.addEventListener('mousedown', this.startDragging.bind(this), false);
 
