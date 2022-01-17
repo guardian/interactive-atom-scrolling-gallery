@@ -17,9 +17,9 @@ export default class Gallery {
     this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
     this.createImagesDuplicatesToAllowLoopingGallery();
     this.galleryStart();
-    this.addDraggingFunctionalityToGallery();
+    // this.addDraggingFunctionalityToGallery();
 
-    this.galleryWrapper.addEventListener('animationend', (e) => this.resetAnimation(e));
+    // this.galleryWrapper.addEventListener('animationend', (e) => this.resetAnimation(e));
     this.galleryWrapper.addEventListener('animationiteration', (e) => this.resetAnimation(e));
     this.galleryButton.addEventListener('click', () => (this.playingGallery ? this.galleryPause() : this.galleryPlay()));
   }
