@@ -1,10 +1,10 @@
 import events from '../../events-emitter';
 
 export default class Dragging {
-  constructor() {
+  constructor(initialSpeed) {
     this.galleryWrapper = document.querySelector('.gallery-wrapper');
     this.galleryPlayingInitialTime = 0;
-    this.initialSpeed = 40;
+    this.initialSpeed = initialSpeed;
     this.speed = this.initialSpeed;
     this.galleryPlaying = false;
 
@@ -12,8 +12,6 @@ export default class Dragging {
 
     this.initialLeft = this.galleryWrapper.getBoundingClientRect().left;
     this.galleryInitialLength = this.galleryWrapper.offsetWidth;
-
-    this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
 
     this.galleryWrapper.addEventListener('animationend', (e) => this.resetAnimation(e));
     this.galleryWrapper.addEventListener('animationiteration', (e) => this.resetAnimation(e));

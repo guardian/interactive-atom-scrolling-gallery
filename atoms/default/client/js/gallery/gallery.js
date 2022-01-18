@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Dragging from './galleryDragging';
 import events from '../../events-emitter';
+import conf from '../../config.json';
 
 export default class Gallery {
   constructor() {
@@ -14,6 +15,10 @@ export default class Gallery {
     // Plays the gallery when it comes into view, unless prefers-reduced-motion is set to true
     this.initialPlay = !prefersReducedMotion;
     this.mouseDown = false;
+    this.calculatedSpeed = this.galleryWrapper.offsetWidth / 80;
+
+    this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
+    this.galleryWrapper.style.setProperty('--gallery-speed', `${this.calculatedSpeed}s`);
 
     this.createImagesDuplicatesToAllowLoopingGallery();
     this.galleryStart();
@@ -39,9 +44,10 @@ export default class Gallery {
     const observer = new IntersectionObserver(this.observeGallery.bind(this), intersectionOptions);
     observer.observe(this.galleryContainer);
 
-    this.draggingEnabled = false;
+    this.draggingEnabled = conf.draggingEnabled;
     if (this.draggingEnabled) {
-      this.dragging = new Dragging();
+      this.galleryWrapper.style.setProperty('--gallery-speed-resume', `${this.calculatedSpeed}s`);
+      this.dragging = new Dragging(this.calculatedSpeed);
       this.dragging.addDraggingFunctionalityToGallery();
 
       events.on('galleryDragging-pause', () => {
