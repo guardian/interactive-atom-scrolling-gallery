@@ -17,6 +17,16 @@ export default class Gallery {
 
     this.galleryButton.addEventListener('click', () => (this.playingGallery ? this.galleryPause() : this.galleryPlay()));
 
+    window.addEventListener('blur', () => {
+      this.currentlyPlaying = this.playingGallery;
+      this.galleryPause();
+    });
+
+    window.addEventListener('focus', () => {
+      if (this.currentlyPlaying) this.galleryPlay();
+      this.playingGallery = this.currentlyPlaying;
+    });
+
     this.draggingEnabled = false;
     if (this.draggingEnabled) {
       this.dragging = new Dragging();
