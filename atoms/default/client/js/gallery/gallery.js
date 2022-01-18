@@ -15,7 +15,7 @@ export default class Gallery {
     // Plays the gallery when it comes into view, unless prefers-reduced-motion is set to true
     this.initialPlay = !prefersReducedMotion;
     this.mouseDown = false;
-    this.calculatedSpeed = this.galleryWrapper.offsetWidth / 80;
+    this.calculatedSpeed = Math.round(this.galleryWrapper.offsetWidth / 80);
 
     this.galleryWrapper.style.setProperty('--gallery-width', `-${this.galleryWrapper.offsetWidth}px`);
     this.galleryWrapper.style.setProperty('--gallery-speed', `${this.calculatedSpeed}s`);
