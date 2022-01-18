@@ -10,10 +10,12 @@ export default class Gallery {
     this.galleryButton = document.querySelector('.gallery-button');
 
     this.playingGallery = false;
+    this.initialPlay = true;
     this.mouseDown = false;
 
     this.createImagesDuplicatesToAllowLoopingGallery();
     this.galleryStart();
+    this.galleryPause();
 
     this.galleryButton.addEventListener('click', () => (this.playingGallery ? this.galleryPause() : this.galleryPlay()));
 
@@ -24,8 +26,16 @@ export default class Gallery {
 
     window.addEventListener('focus', () => {
       if (this.currentlyPlaying) this.galleryPlay();
-      this.playingGallery = this.currentlyPlaying;
     });
+
+    const intersectionOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver(this.observeGallery.bind(this), intersectionOptions);
+    observer.observe(this.galleryContainer);
 
     this.draggingEnabled = false;
     if (this.draggingEnabled) {
@@ -38,9 +48,25 @@ export default class Gallery {
     }
   }
 
+  observeGallery(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (this.initialPlay) {
+          this.galleryPlay();
+          this.currentlyPlaying = true;
+        }
+        if (this.currentlyPlaying) this.galleryPlay();
+      } else {
+        this.currentlyPlaying = this.playingGallery;
+        this.galleryPause();
+      }
+    });
+  }
+
   galleryStart() {
     this.galleryWrapper.classList.add('first');
     this.playingGallery = true;
+    this.initialPlay = true;
     events.emit('gallery-start');
   }
 
@@ -58,6 +84,7 @@ export default class Gallery {
     document.querySelector('.gallery-button--play').classList.remove('active');
     document.querySelector('.gallery-button--pause').classList.add('active');
     this.playingGallery = true;
+    this.initialPlay = false;
     events.emit('gallery-play');
   }
 
