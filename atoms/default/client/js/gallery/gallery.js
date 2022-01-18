@@ -8,9 +8,11 @@ export default class Gallery {
     this.galleryWrapper = document.querySelector('.gallery-wrapper');
     this.galleryImages = document.querySelectorAll('.gallery-slide');
     this.galleryButton = document.querySelector('.gallery-button');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion)').matches;
 
     this.playingGallery = false;
-    this.initialPlay = true;
+    // Plays the gallery when it comes into view, unless prefers-reduced-motion is set to true
+    this.initialPlay = !prefersReducedMotion;
     this.mouseDown = false;
 
     this.createImagesDuplicatesToAllowLoopingGallery();
