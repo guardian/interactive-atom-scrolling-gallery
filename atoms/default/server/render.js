@@ -16,7 +16,7 @@ export function render() {
       // eslint-disable-next-line no-return-assign
       count: () => () => counter += 1,
       createCaption: () => (text, rendering) => {
-        if (rendering(text)) return `<span class="swiper-slide__caption">${rendering(text)}</span>`;
+        if (rendering(text)) return `<span class="gallery-slide__caption">${rendering(text)}</span>`;
         return '';
       },
     };
