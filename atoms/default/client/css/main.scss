@@ -1,17 +1,35 @@
-// @import "enhanced_fonts"; // for when you need special font features 
+// @import "enhanced_fonts"; // for when you need special font features
 @import "fonts";
 @import "mq";
 @import "palette";
+// @import "dcr_enhancer";
 @import "gallery"; //remove this line when using immersive weighting or the article template
 
 .interactive-atom {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
-.ios, .android {
-    //remove dark mode padding in apps
-    figure.element.element-atom, figure.interactive.interactive-atom.interactive--loading {
-        padding: 0 !important;
-    }
+.element-immersive {
+  @include mq(tablet) {
+    margin-left: -20px;
+    margin-right: -40px;
+  }
+  @include mq(desktop) {
+    width: 100vw;
+    margin-left: calc(-50vw + 470px);
+    margin-right: unset;
+  }
+  @include mq(leftCol) {
+    margin-left: calc(-50vw + 390px);
+  }
+}
+
+.ios,
+.android {
+  //remove dark mode padding in apps
+  figure.element.element-atom,
+  figure.interactive.interactive-atom.interactive--loading {
+    padding: 0 !important;
+  }
 }
